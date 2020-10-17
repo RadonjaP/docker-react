@@ -1,0 +1,11 @@
+language: generic
+sudo: required  # We need full permission
+services:
+    - docker
+
+before_install:
+    - docker build -t radonjap/docker-react -f Dockerfile.dev . #build image
+
+script:
+    - docker run -e CI=true radonjap/docker-react npm run test -- --coverage
+    # --coverage is added to automatically exit after-test menu
